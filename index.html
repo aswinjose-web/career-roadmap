@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Era Career Pivot Roadmap — Developer → AI-Native Manager</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F9FB;
+    --surface: #FFFFFF;
+    --border: #E4E7EC;
+    --border-soft: #F1F3F7;
+    --text: #0F172A;
+    --muted: #64748B;
+    --hint: #94A3B8;
+    --sidebar-w: 260px;
+
+    --p0: #64748B; --p0-light: #F1F5F9; --p0-mid: #CBD5E1;
+    --p1: #2563EB; --p1-light: #EFF6FF; --p1-mid: #BFDBFE;
+    --p2: #0D9488; --p2-light: #F0FDFA; --p2-mid: #99F6E4;
+    --p3: #7C3AED; --p3-light: #F5F3FF; --p3-mid: #DDD6FE;
+    --p4: #D97706; --p4-light: #FFFBEB; --p4-mid: #FDE68A;
+    --p5: #16A34A; --p5-light: #F0FDF4; --p5-mid: #BBF7D0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #0F3460 100%);
+    color: white;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(37,99,235,0.15);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #60A5FA;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 540px;
+    margin-bottom: 14px;
+    letter-spacing: -.02em;
+  }
+  .hero p {
+    color: #94A3B8;
+    max-width: 500px;
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-val { font-size: 20px; font-weight: 700; color: #F1F5F9; }
+  .stat-lbl { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: .06em; }
+
+  /* ── Layout ── */
+  .layout {
+    display: flex;
+    align-items: flex-start;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 0;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+    padding: 28px 0 28px 0;
+    align-self: flex-start;
+  }
+  .sidebar-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--hint);
+    padding: 0 16px 12px;
+  }
+  .phase-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .15s, color .15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .phase-nav-item:hover { background: var(--border-soft); color: var(--text); }
+  .phase-nav-item.active { background: var(--border-soft); color: var(--text); }
+  .nav-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+    transition: all .15s;
+  }
+  .phase-nav-item.active .nav-dot { transform: scale(1.05); }
+  .sidebar-divider { height: 1px; background: var(--border); margin: 12px 16px; }
+  .sidebar-note {
+    padding: 0 16px;
+    font-size: 12px;
+    color: var(--hint);
+    line-height: 1.5;
+  }
+
+  /* ── Main content ── */
+  .main { flex: 1; padding: 32px 0 80px 32px; min-width: 0; }
+
+  /* ── Phase section ── */
+  .phase-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 28px;
+    scroll-margin-top: 24px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .phase-number {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .phase-meta { flex: 1; }
+  .phase-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  .phase-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: 4px;
+  }
+  .phase-timeline {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .phase-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  /* Skills pills */
+  .skills-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--hint);
+    margin-bottom: 10px;
+  }
+  .skills-wrap {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 26px;
+  }
+  .skill-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--bg);
+    font-weight: 500;
+  }
+
+  /* Resources grid */
+  .resources-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--hint);
+    margin-bottom: 12px;
+  }
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .resource-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .resource-card:hover { border-color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .resource-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .r-type {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .r-free { background: #DCFCE7; color: #166534; }
+  .r-paid { background: #FEF9C3; color: #854D0E; }
+  .r-tool { background: #E0E7FF; color: #3730A3; }
+  .r-read { background: #FCE7F3; color: #9D174D; }
+  .r-video { background: #FEE2E2; color: #991B1B; }
+  .r-community { background: #F3E8FF; color: #6B21A8; }
+  .r-time {
+    font-size: 11px;
+    color: var(--hint);
+    white-space: nowrap;
+  }
+  .resource-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .resource-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 4px;
+    transition: opacity .15s;
+  }
+  .resource-link:hover { opacity: .75; }
+
+  /* Project box */
+  .project-box {
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-box::before {
+    content: '🛠';
+    position: absolute;
+    right: 20px; top: 16px;
+    font-size: 28px;
+    opacity: .18;
+  }
+  .project-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .project-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .project-box p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .project-tasks {
+    margin-top: 10px;
+    padding-left: 16px;
+  }
+  .project-tasks li {
+    font-size: 13px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── Callout box ── */
+  .callout {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 13px;
+    color: #1E3A5F;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .callout strong { color: #1D4ED8; }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: #0F172A;
+    color: #94A3B8;
+    padding: 40px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .page-footer strong { color: #F1F5F9; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 20px 0 60px; }
+    .layout { padding: 0 16px; }
+    .hero { padding: 36px 20px 32px; }
+    .hero h1 { font-size: 24px; }
+    .phase-section { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-eyebrow">Learning Roadmap · Developer / Manager Edition</div>
+  <h1>Your AI Era Career Pivot — From Developer to AI-Native Leader</h1>
+  <p>A structured, phase-by-phase learning journey with curated resources, hands-on projects, and management skills for the new AI era.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-val">5 Phases</span><span class="stat-lbl">Learning stages</span></div>
+    <div class="stat"><span class="stat-val">~9 Months</span><span class="stat-lbl">Full journey</span></div>
+    <div class="stat"><span class="stat-val">40+ Resources</span><span class="stat-lbl">Curated links</span></div>
+    <div class="stat"><span class="stat-val">6 Projects</span><span class="stat-lbl">Hands-on builds</span></div>
+  </div>
+</div>
+
+<!-- ── Layout ── -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-title">Learning Path</div>
+
+    <a class="phase-nav-item active" href="#phase0">
+      <div class="nav-dot" style="background:var(--p0-light);color:var(--p0)">0</div>
+      Orientation
+    </a>
+    <a class="phase-nav-item" href="#phase1">
+      <div class="nav-dot" style="background:var(--p1-light);color:var(--p1)">1</div>
+      LLM Fundamentals
+    </a>
+    <a class="phase-nav-item" href="#phase2">
+      <div class="nav-dot" style="background:var(--p2-light);color:var(--p2)">2</div>
+      Building with AI
+    </a>
+    <a class="phase-nav-item" href="#phase3">
+      <div class="nav-dot" style="background:var(--p3-light);color:var(--p3)">3</div>
+      Agents & Orchestration
+    </a>
+    <a class="phase-nav-item" href="#phase4">
+      <div class="nav-dot" style="background:var(--p4-light);color:var(--p4)">4</div>
+      AI Leadership
+    </a>
+    <a class="phase-nav-item" href="#phase5">
+      <div class="nav-dot" style="background:var(--p5-light);color:var(--p5)">5</div>
+      Specialization
+    </a>
+
+    <div class="sidebar-divider"></div>
+    <p class="sidebar-note">Phases 1–3 are sequential. Phase 4 runs <em>in parallel</em> from week 3 onward. Phase 5 is ongoing.</p>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <div class="callout">
+      <strong>How to use this guide:</strong> Work through Phases 0–3 in order (roughly 2 months each). Start Phase 4 (leadership skills) in parallel with Phase 1 — you can absorb management concepts while building technical ones. Phase 5 is a long-term track you choose based on your role direction.
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 0: ORIENTATION
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase0">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p0-light);color:var(--p0)">0</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p0-light);color:var(--p0)">Starting point</span>
+          <h2 class="phase-title">AI Landscape Orientation</h2>
+          <span class="phase-timeline">⏱ Weeks 1–2 · ~10 hours total</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">Before writing a single line of code, build a clear mental model of the AI landscape. Understand what LLMs actually are under the hood, what's changed in the last 3 years, and where your existing skills fit. This phase is reading, watching, and forming opinions — no setup required.</p>
+
+      <div class="skills-label">What you'll gain</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">AI vocabulary & terminology</span>
+        <span class="skill-pill">How LLMs work (conceptually)</span>
+        <span class="skill-pill">Model types: open vs closed</span>
+        <span class="skill-pill">Current AI landscape</span>
+        <span class="skill-pill">Where your skills fit</span>
+      </div>
+
+      <div class="resources-label">Resources</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-video">Video</span>
+            <span class="r-time">1 hr</span>
+          </div>
+          <h4>Intro to Large Language Models — Andrej Karpathy</h4>
+          <p>The clearest 1-hour explanation of what LLMs are, how they work, and where they're going. Mandatory watch. Karpathy built GPT-2 and trained at OpenAI.</p>
+          <a class="resource-link" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" style="color:var(--p0)">Watch on YouTube →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-video">Video Series</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>Neural Networks: Zero to Hero — Andrej Karpathy</h4>
+          <p>Goes deeper into how neural nets and transformers work from first principles. Watch episodes 1 and the transformer episode to build intuition.</p>
+          <a class="resource-link" href="https://www.youtube.com/@AndrejKarpathy" target="_blank" style="color:var(--p0)">Karpathy's channel →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Article</span>
+            <span class="r-time">45 min</span>
+          </div>
+          <h4>3Blue1Brown: But what is a neural network?</h4>
+          <p>Stunning visual explanations of how neural networks learn. Best visual intro to the underlying math without heavy prerequisites.</p>
+          <a class="resource-link" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" style="color:var(--p0)">Watch playlist →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Microsoft: Generative AI for Beginners</h4>
+          <p>18-lesson GitHub course covering generative AI concepts, LLM applications, and building your first app. Practical, well-structured, and free.</p>
+          <a class="resource-link" href="https://github.com/microsoft/generative-ai-for-beginners" target="_blank" style="color:var(--p0)">Open on GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p0-light);border-color:var(--p0-mid)">
+        <div class="project-eyebrow" style="color:var(--p0)">Phase 0 Checkpoint</div>
+        <h4>Write your "AI positioning" document</h4>
+        <p>After this phase, write a 1-page personal note (not for anyone else) covering:</p>
+        <ul class="project-tasks" style="color:var(--muted)">
+          <li>Three things about AI that surprised you</li>
+          <li>Two areas where your existing skills transfer directly</li>
+          <li>One thing you want to build in 3 months</li>
+          <li>The biggest open question you have about AI's role in your team</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 1: LLM FUNDAMENTALS
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase1">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p1-light);color:var(--p1)">1</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p1-light);color:var(--p1)">Core technical</span>
+          <h2 class="phase-title">LLM Fundamentals & Prompt Engineering</h2>
+          <span class="phase-timeline">⏱ Weeks 3–10 · 4–6 hrs/week</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">This is where you get hands-on. You'll learn to call LLM APIs, design effective prompts, handle structured output, and understand the operational basics of working with language models. By the end, you'll be writing real code that calls AI APIs and producing reliable, consistent outputs.</p>
+
+      <div class="skills-label">Skills you'll build</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">Prompt design patterns</span>
+        <span class="skill-pill">System prompts & roles</span>
+        <span class="skill-pill">Few-shot examples</span>
+        <span class="skill-pill">Chain-of-thought prompting</span>
+        <span class="skill-pill">Structured / JSON output</span>
+        <span class="skill-pill">Anthropic API & Claude SDK</span>
+        <span class="skill-pill">Token counting & cost estimation</span>
+        <span class="skill-pill">Context window management</span>
+        <span class="skill-pill">Temperature & sampling</span>
+        <span class="skill-pill">Error handling for LLM calls</span>
+      </div>
+
+      <div class="resources-label">Resources — work through in order</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">1.5 hrs</span>
+          </div>
+          <h4>ChatGPT Prompt Engineering for Developers — DeepLearning.AI</h4>
+          <p>Co-created by Andrew Ng and OpenAI. Covers iterative prompting, summarization, inferring, transforming, and expanding. Jupyter notebooks included. Start here.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-eng-for-developers/" target="_blank" style="color:var(--p1)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Official Docs</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Anthropic Prompt Engineering Guide</h4>
+          <p>Anthropic's official prompt engineering documentation. Covers Claude-specific techniques: XML tags, long-context prompting, and avoiding common failure modes. Very practical.</p>
+          <a class="resource-link" href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" style="color:var(--p1)">Read the guide →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Building Systems with the ChatGPT API — DeepLearning.AI</h4>
+          <p>Goes beyond single prompts to multi-step pipelines. Covers moderation, chaining, evaluation. Directly applicable to production systems.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/" target="_blank" style="color:var(--p1)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Reference Guide</span>
+            <span class="r-time">1 hr</span>
+          </div>
+          <h4>Prompt Engineering Guide — DAIR.AI</h4>
+          <p>Comprehensive community reference covering all major prompting techniques: zero-shot, few-shot, CoT, ReAct, and more. Great bookmark for quick lookup.</p>
+          <a class="resource-link" href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank" style="color:var(--p1)">Open on GitHub →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-tool">Tool</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>Anthropic API — Quickstart</h4>
+          <p>Get your API key and run your first Python or TypeScript call. Start with claude-sonnet. Build a tiny CLI tool: give it a task and let it respond.</p>
+          <a class="resource-link" href="https://docs.anthropic.com/en/api/getting-started" target="_blank" style="color:var(--p1)">API quickstart →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Cookbook</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>OpenAI Cookbook — Recipes & Examples</h4>
+          <p>Even if you use Claude, this cookbook has excellent patterns for structured output, function calling, and production best practices that translate across models.</p>
+          <a class="resource-link" href="https://github.com/openai/openai-cookbook" target="_blank" style="color:var(--p1)">Browse cookbook →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p1-light);border-color:var(--p1-mid)">
+        <div class="project-eyebrow" style="color:var(--p1)">Phase 1 Build Project</div>
+        <h4>CLI Code Review Assistant</h4>
+        <p>Build a command-line tool that accepts a file path or Git diff and returns a structured code review using the Anthropic API.</p>
+        <ul class="project-tasks" style="color:#1E3A5F">
+          <li>Accept input from stdin or a file argument</li>
+          <li>Use a well-crafted system prompt defining a senior reviewer persona</li>
+          <li>Return structured output: severity, category, line reference, suggestion</li>
+          <li>Handle token limit gracefully (chunk large files)</li>
+          <li>Bonus: add a <code>--team-standards</code> flag to inject your team's style guide</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 2: BUILDING WITH AI — RAG
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase2">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p2-light);color:var(--p2)">2</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p2-light);color:var(--p2)">Applied building</span>
+          <h2 class="phase-title">Building with AI — RAG & Data Systems</h2>
+          <span class="phase-timeline">⏱ Weeks 11–18 · 5–7 hrs/week</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">RAG (Retrieval-Augmented Generation) is the most important architecture in enterprise AI right now. It's how you connect LLMs to your company's own data — docs, code, tickets, wikis — without retraining a model. Understanding RAG end-to-end makes you valuable in any technical AI conversation. You'll learn embeddings, vector databases, chunking strategies, and retrieval ranking.</p>
+
+      <div class="skills-label">Skills you'll build</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">Text embeddings</span>
+        <span class="skill-pill">Vector databases (Chroma, Qdrant)</span>
+        <span class="skill-pill">Semantic similarity search</span>
+        <span class="skill-pill">Chunking strategies</span>
+        <span class="skill-pill">Document loaders</span>
+        <span class="skill-pill">Retrieval reranking</span>
+        <span class="skill-pill">LlamaIndex / LangChain</span>
+        <span class="skill-pill">Hybrid search (BM25 + semantic)</span>
+        <span class="skill-pill">RAG evaluation (RAGAS)</span>
+      </div>
+
+      <div class="resources-label">Resources</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>LangChain: Chat with Your Data — DeepLearning.AI</h4>
+          <p>Covers document loading, splitting, embeddings, and retrieval with LangChain. A practical RAG from scratch in Jupyter notebooks. Best starting point for RAG.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/" target="_blank" style="color:var(--p2)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Building & Evaluating Advanced RAG — DeepLearning.AI</h4>
+          <p>Goes beyond basic RAG: sentence-window retrieval, auto-merging, and evaluation metrics. This is where you learn to make RAG actually reliable.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/" target="_blank" style="color:var(--p2)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Documentation</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>LlamaIndex — Core Concepts & Tutorials</h4>
+          <p>LlamaIndex is purpose-built for data-connected LLM apps. Work through the Getting Started guide, then the RAG tutorial. The docs are excellent.</p>
+          <a class="resource-link" href="https://docs.llamaindex.ai/en/stable/getting_started/starter_example/" target="_blank" style="color:var(--p2)">Start here →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-tool">Tool</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>Chroma — Local Vector Database</h4>
+          <p>The easiest vector database to get started with. Runs locally in Python with no config. Perfect for building RAG prototypes before choosing a cloud DB.</p>
+          <a class="resource-link" href="https://docs.trychroma.com/getting-started" target="_blank" style="color:var(--p2)">Get started →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-tool">Tool</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>RAGAS — RAG Evaluation Framework</h4>
+          <p>Automates evaluation of RAG pipelines across faithfulness, answer relevance, and context precision. Essential for measuring whether your RAG is actually good.</p>
+          <a class="resource-link" href="https://docs.ragas.io/en/stable/" target="_blank" style="color:var(--p2)">RAGAS docs →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">1.5 hrs</span>
+          </div>
+          <h4>Vector Databases: from Embeddings to Applications — DeepLearning.AI</h4>
+          <p>Covers the internals of vector similarity search, approximate nearest neighbor algorithms, and choosing between databases. Great context before picking Pinecone vs Qdrant vs Weaviate.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/" target="_blank" style="color:var(--p2)">Start course →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p2-light);border-color:var(--p2-mid)">
+        <div class="project-eyebrow" style="color:var(--p2)">Phase 2 Build Project</div>
+        <h4>Internal Team Knowledge Base Q&A</h4>
+        <p>Build a RAG system that answers questions over your team's actual documentation — READMEs, Confluence pages, Notion docs, or runbooks.</p>
+        <ul class="project-tasks" style="color:#064E3B">
+          <li>Load documents from a folder (PDFs, Markdown, plain text)</li>
+          <li>Chunk intelligently (by heading, not arbitrary token count)</li>
+          <li>Store embeddings in Chroma locally</li>
+          <li>Answer questions with source citations ("Found in: auth-service/README.md")</li>
+          <li>Evaluate: create 10 test questions, measure answer quality with RAGAS</li>
+          <li>Bonus: add a Slack slash command so your team can use it</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 3: AGENTS & ORCHESTRATION
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase3">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p3-light);color:var(--p3)">3</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p3-light);color:var(--p3)">Advanced building</span>
+          <h2 class="phase-title">AI Agents & Multi-Step Orchestration</h2>
+          <span class="phase-timeline">⏱ Weeks 19–26 · 5–7 hrs/week</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">Agents let LLMs take actions — calling APIs, browsing the web, writing and running code, searching databases — and chain multiple steps together autonomously. This is the frontier of applied AI engineering. As a manager, knowing agent failure modes and how to architect reliable agentic systems makes you irreplaceable in technical planning conversations.</p>
+
+      <div class="skills-label">Skills you'll build</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">Tool use / function calling</span>
+        <span class="skill-pill">ReAct reasoning pattern</span>
+        <span class="skill-pill">Multi-agent architectures</span>
+        <span class="skill-pill">LangGraph stateful agents</span>
+        <span class="skill-pill">Anthropic tool use API</span>
+        <span class="skill-pill">MCP (Model Context Protocol)</span>
+        <span class="skill-pill">Agent debugging & tracing</span>
+        <span class="skill-pill">Guardrails & safety</span>
+        <span class="skill-pill">Human-in-the-loop patterns</span>
+      </div>
+
+      <div class="resources-label">Resources</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Functions, Tools and Agents with LangChain — DeepLearning.AI</h4>
+          <p>Covers function calling, tagging, extraction, and building agents that can use tools. The clearest introduction to the agent paradigm with working code.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/functions-tools-agents-langchain/" target="_blank" style="color:var(--p3)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>AI Agents in LangGraph — DeepLearning.AI</h4>
+          <p>Build stateful, multi-actor agents using LangGraph. Covers cycles, persistence, human-in-the-loop, and multi-agent collaboration. This is the current production standard.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" target="_blank" style="color:var(--p3)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Official Docs</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Anthropic Tool Use Documentation</h4>
+          <p>How Claude uses tools and function calling natively. Includes computer use, code execution, and web search patterns. Use Claude's native tool format for best results.</p>
+          <a class="resource-link" href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" target="_blank" style="color:var(--p3)">Read docs →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Spec / Protocol</span>
+            <span class="r-time">1 hr</span>
+          </div>
+          <h4>Model Context Protocol (MCP) — Anthropic</h4>
+          <p>MCP is the emerging standard for connecting AI to external tools and data sources. Understanding it positions you for the next wave of agentic tool integrations.</p>
+          <a class="resource-link" href="https://modelcontextprotocol.io/" target="_blank" style="color:var(--p3)">Read the spec →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-tool">Tool</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>LangSmith — Agent Tracing & Debugging</h4>
+          <p>Visualizes your agent's reasoning steps, tool calls, and intermediate outputs. Essential for debugging why an agent looped or hallucinated. Free tier is generous.</p>
+          <a class="resource-link" href="https://docs.smith.langchain.com/" target="_blank" style="color:var(--p3)">Get started →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">1.5 hrs</span>
+          </div>
+          <h4>Multi AI Agent Systems with CrewAI — DeepLearning.AI</h4>
+          <p>Build multi-agent systems where specialized agents collaborate on complex tasks. CrewAI is the most production-ready multi-agent framework right now.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/multi-ai-agent-systems-with-crewai/" target="_blank" style="color:var(--p3)">Start course →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p3-light);border-color:var(--p3-mid)">
+        <div class="project-eyebrow" style="color:var(--p3)">Phase 3 Build Project</div>
+        <h4>Automated Sprint Retrospective Agent</h4>
+        <p>Build an agent that reads your team's completed sprint (Jira/Linear/GitHub issues) and generates a retrospective report automatically.</p>
+        <ul class="project-tasks" style="color:#3B0764">
+          <li>Tool 1: Query your project management API for closed issues in date range</li>
+          <li>Tool 2: Read PR descriptions and commit messages from GitHub</li>
+          <li>Tool 3: Look up any linked Slack threads (or Notion docs)</li>
+          <li>Agent synthesizes: what went well, blockers, patterns, action items</li>
+          <li>Add human-in-the-loop: agent pauses and asks for clarification on ambiguous items</li>
+          <li>Bonus: post the report to Slack automatically with an approval step</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 4: AI LEADERSHIP
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase4">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p4-light);color:var(--p4)">4</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p4-light);color:var(--p4)">Runs in parallel</span>
+          <h2 class="phase-title">AI Leadership, Management & Governance</h2>
+          <span class="phase-timeline">⏱ Start at Week 3 · Ongoing · 2–3 hrs/week</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">This phase runs alongside the technical phases. While you're building technical skills, absorb the management and governance layer in parallel — because the teams you lead are already changing whether or not you have a formal AI strategy. These skills compound: the faster you develop AI judgment, the more credibly you can lead your team through the transition.</p>
+
+      <div class="skills-label">Leadership areas</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">Managing AI-augmented velocity</span>
+        <span class="skill-pill">AI tool evaluation framework</span>
+        <span class="skill-pill">Reviewing AI-generated code</span>
+        <span class="skill-pill">Estimating effort in AI era</span>
+        <span class="skill-pill">AI acceptable use policies</span>
+        <span class="skill-pill">Data governance for AI</span>
+        <span class="skill-pill">AI risk assessment</span>
+        <span class="skill-pill">Build vs buy vs fine-tune</span>
+        <span class="skill-pill">AI product roadmapping</span>
+      </div>
+
+      <div class="resources-label">Books — read one per month</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-paid">Book</span>
+            <span class="r-time">~6 hrs</span>
+          </div>
+          <h4>Competing in the Age of AI — Iansiti & Lakhani</h4>
+          <p>How AI reshapes operating models and competitive strategy. HBS professors, deeply researched. Read this to understand the strategic dimension of what you're building.</p>
+          <a class="resource-link" href="https://www.amazon.in/Competing-Age-AI-Leadership-Algorithms/dp/1633697622" target="_blank" style="color:var(--p4)">Find on Amazon →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-paid">Book</span>
+            <span class="r-time">~5 hrs</span>
+          </div>
+          <h4>The AI-First Company — Ash Fontana</h4>
+          <p>Practical playbook for building companies and teams around AI. Covers data flywheels, ML team structure, and the AI product development cycle. More tactical than Iansiti.</p>
+          <a class="resource-link" href="https://www.amazon.in/AI-First-Company-Compete-Intelligence/dp/0593330648" target="_blank" style="color:var(--p4)">Find on Amazon →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Article Series</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>a16z AI Playbook — Guides for Building with AI</h4>
+          <p>Andreessen Horowitz's collection of practical guides on AI product development, evaluation, and deployment. High signal-to-noise for technical managers.</p>
+          <a class="resource-link" href="https://a16z.com/ai/" target="_blank" style="color:var(--p4)">Browse guides →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>AI For Everyone — Andrew Ng (Coursera)</h4>
+          <p>Non-technical overview of AI's role in organizations, how to spot AI opportunities, and how to work with technical teams. Perfect for calibrating conversations with executives.</p>
+          <a class="resource-link" href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" style="color:var(--p4)">Enroll free →</a>
+        </div>
+      </div>
+
+      <div class="resources-label">Frameworks to develop</div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Framework</span>
+            <span class="r-time">1 week to build</span>
+          </div>
+          <h4>AI Tool Evaluation Checklist</h4>
+          <p>Build your own: security posture, data residency (critical in India), SOC 2, cost at scale, API rate limits, vendor lock-in score, reliability SLA. Use it when your team proposes new tools.</p>
+          <a class="resource-link" href="https://www.anthropic.com/security" target="_blank" style="color:var(--p4)">Example: Anthropic security →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-read">Practice</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>Red-Teaming Sessions for AI Features</h4>
+          <p>Run a structured 2-hour session where your team tries to break every AI feature before launch: prompt injection, hallucinated data, edge case inputs, adversarial users. Build this into your sprint cycle.</p>
+          <a class="resource-link" href="https://www.anthropic.com/responsible-scaling-policy" target="_blank" style="color:var(--p4)">Anthropic's safety thinking →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p4-light);border-color:var(--p4-mid)">
+        <div class="project-eyebrow" style="color:var(--p4)">Phase 4 Practice Project</div>
+        <h4>AI Adoption Playbook for Your Team</h4>
+        <p>Write a short internal document (3–5 pages) covering your team's approach to AI tools.</p>
+        <ul class="project-tasks" style="color:#78350F">
+          <li>Which tools are approved for daily use (and why)</li>
+          <li>What data can and cannot be sent to external AI APIs</li>
+          <li>How you'll review AI-generated code in PRs</li>
+          <li>Your process for evaluating and onboarding new AI tools</li>
+          <li>How you'll measure whether AI is actually improving team velocity</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         PHASE 5: SPECIALIZATION
+    ════════════════════════════════════════════════════════ -->
+    <section class="phase-section" id="phase5">
+      <div class="phase-header">
+        <div class="phase-number" style="background:var(--p5-light);color:var(--p5)">5</div>
+        <div class="phase-meta">
+          <span class="phase-badge" style="background:var(--p5-light);color:var(--p5)">Month 6+ · Choose your track</span>
+          <h2 class="phase-title">Advanced Specialization — Choose Your Track</h2>
+          <span class="phase-timeline">⏱ Month 6 onwards · Ongoing</span>
+        </div>
+      </div>
+
+      <p class="phase-desc">After the core foundations, specialize based on the direction you want to take your role. Pick the track that aligns with what you're building and the team you're leading. These tracks are not mutually exclusive — but going deep on one for 6 months beats going shallow on three.</p>
+
+      <div class="skills-label">Track A — LLM Evaluation & Quality Engineering</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Best if your role involves ensuring AI product quality, setting engineering standards, or working in highly regulated domains.</p>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">2 hrs</span>
+          </div>
+          <h4>Evaluating and Debugging Generative AI — DeepLearning.AI</h4>
+          <p>Covers trace-based debugging, model evaluation pipelines, and LLM-as-judge patterns using Weights & Biases. Critical for production AI quality.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/" target="_blank" style="color:var(--p5)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-tool">Tool</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>DeepEval — Open Source LLM Evaluation</h4>
+          <p>Python framework for unit-testing LLM outputs. Define what "correct" looks like and run automated tests in CI/CD. Integrates with pytest.</p>
+          <a class="resource-link" href="https://docs.confident-ai.com/" target="_blank" style="color:var(--p5)">DeepEval docs →</a>
+        </div>
+      </div>
+
+      <div class="skills-label" style="margin-top:20px">Track B — Fine-Tuning & Model Customization</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Best if your team needs domain-specific models, lower latency, or wants to reduce API costs at scale.</p>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>Finetuning Large Language Models — DeepLearning.AI</h4>
+          <p>Covers when to fine-tune vs prompt, instruction fine-tuning, LoRA, and evaluating fine-tuned models. Practical notebooks included.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/finetuning-large-language-models/" target="_blank" style="color:var(--p5)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">4 hrs</span>
+          </div>
+          <h4>Hugging Face NLP Course — Fine-Tuning Chapter</h4>
+          <p>Deep dive into fine-tuning transformer models with the Hugging Face ecosystem. Chapter 3 is the one you need. Great hands-on exercises.</p>
+          <a class="resource-link" href="https://huggingface.co/learn/nlp-course/chapter3/1" target="_blank" style="color:var(--p5)">Read chapter 3 →</a>
+        </div>
+      </div>
+
+      <div class="skills-label" style="margin-top:20px">Track C — Production AI Systems & MLOps</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Best if you're building AI-powered products at scale and need to own the deployment and monitoring pipeline.</p>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-free">Free Course</span>
+            <span class="r-time">3 hrs</span>
+          </div>
+          <h4>LLMOps — DeepLearning.AI</h4>
+          <p>Covers versioning prompts, pre-computing embeddings, deploying to Google Cloud, and monitoring in production. The operational side of AI engineering.</p>
+          <a class="resource-link" href="https://www.deeplearning.ai/short-courses/llmops/" target="_blank" style="color:var(--p5)">Start course →</a>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <span class="r-type r-community">Community</span>
+            <span class="r-time">Ongoing</span>
+          </div>
+          <h4>r/LocalLLaMA — Practitioner Community</h4>
+          <p>The most active community for running local models, quantization techniques, hardware comparisons, and new model releases. High signal for practitioners.</p>
+          <a class="resource-link" href="https://www.reddit.com/r/LocalLLaMA/" target="_blank" style="color:var(--p5)">Join community →</a>
+        </div>
+      </div>
+
+      <div class="project-box" style="background:var(--p5-light);border-color:var(--p5-mid)">
+        <div class="project-eyebrow" style="color:var(--p5)">Phase 5 Capstone</div>
+        <h4>Ship something your team actually uses</h4>
+        <p>By this point, build something real that solves a real problem for your team. The goal isn't to showcase AI — it's to solve a real problem. Ideas:</p>
+        <ul class="project-tasks" style="color:#14532D">
+          <li>An internal AI assistant over your company's documentation + Jira + Slack</li>
+          <li>An automated PR description generator that follows your team's conventions</li>
+          <li>A fine-tuned model for your domain (legal, fintech, healthcare) that your team relies on</li>
+          <li>A monitoring dashboard that alerts on AI output quality degradation in production</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<div class="page-footer">
+  <p><strong>Your edge isn't just knowing AI — it's knowing how to build with it and lead teams through it.</strong></p>
+  <p style="margin-top:8px">Revisit this guide every 3 months. The tooling changes fast; the fundamentals don't.</p>
+  <p style="margin-top:16px;font-size:11px;color:#475569">Career Pivot Roadmap · Developer / Manager Edition · Created for the AI era</p>
+</div>
+
+<script>
+  // Sidebar scroll highlighting
+  const sections = document.querySelectorAll('.phase-section');
+  const navItems = document.querySelectorAll('.phase-nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Smooth scroll
+  navItems.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(item.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
